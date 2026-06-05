@@ -1,48 +1,6 @@
 export const productsMetadata = [
    
     {
-        id: "SM-003",
-        sku: "SM-001",
-        slug: "singhasanadhishwar-chhatrapati-sambhaji-maharaj",
-        name: {
-            en: "Sinhasanadhishwar Chhatrapati Sambhaji Maharaj",
-            mr: "सिंहासनाधीश्वर छत्रपती संभाजी महाराज",
-            hi: "सिंहासनाधीश्वर छत्रपति संभाजी महाराज"
-        },
-        category: "history",
-        subCategory: "छत्रपती संभाजी महाराज",
-        type: "Premium",
-        status: "active",
-        isFeatured: true,
-        basePrice: 8500,
-        price: "8,500",
-        description: "A crown jewel of the Aaple Chhatrapati Arts collection. This exclusive, copyrighted design captures the commanding presence of Chhatrapati Sambhaji Maharaj.",
-        material: {
-            en: "Marble Powder + Resin",
-            mr: "मार्बल पावडर + रेझिन",
-            hi: "मार्बल पाउडर + राल"
-        },
-        finish: "Antique Gold",
-        weight: "4.5 KG",
-        images: [
-            "/images/IMAGE OF COLLECTION/History Collection/छत्रपती संभाजी महाराज/सिंहासनाधीश्वर छत्रपती संभाजी महाराज १२ इंच/1.jpeg",
-            "/images/IMAGE OF COLLECTION/History Collection/छत्रपती संभाजी महाराज/सिंहासनाधीश्वर छत्रपती संभाजी महाराज १२ इंच/2.jpeg",
-            "/images/IMAGE OF COLLECTION/History Collection/छत्रपती संभाजी महाराज/सिंहासनाधीश्वर छत्रपती संभाजी महाराज १२ इंच/3.jpeg",
-            "/images/IMAGE OF COLLECTION/History Collection/छत्रपती संभाजी महाराज/सिंहासनाधीश्वर छत्रपती संभाजी महाराज १२ इंच/4.jpeg"
-        ],
-        trackInventory: true,
-        stockQuantity: 12,
-        variants: [
-            { sku: "SM-001-12", size: "12 Inch", finish: "Antique Gold", price: 4500, stockQuantity: 8 },
-            { sku: "SM-001-24", size: "24 Inch", finish: "Antique Gold", price: 8500, stockQuantity: 4 }
-        ],
-        translations: {
-            en: { name: "Sinhasanadhishwar Chhatrapati Sambhaji Maharaj" },
-            mr: { name: "सिंहासनाधीश्वर छत्रपती संभाजी महाराज" },
-            hi: { name: "सिंहासनाधीश्वर छत्रपति संभाजी महाराज" }
-        }
-    },
-    {
         id: "AMB-001",
         sku: "AMB-001",
         slug: "dr-babasaheb-ambेडकर-statue",
