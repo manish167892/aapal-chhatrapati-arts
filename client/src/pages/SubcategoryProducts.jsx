@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import ProductCard from '../components/ui/ProductCard';
-import axios from 'axios';
+import { products as localProducts } from '../data/products';
 import './CollectionStyles.css';
 
 const SubcategoryProducts = () => {
@@ -22,24 +22,19 @@ const SubcategoryProducts = () => {
         fetchProducts();
     }, [category, subcategory]);
 
-    const fetchProducts = async () => {
+    const fetchProducts = () => {
         setLoading(true);
         try {
-            const { data } = await axios.get('http://localhost:5000/api/products');
+            // Filter local products by exact category and subCategory (folder name)
+            const filteredData = localProducts.filter(p =>
+                (p.category || '').toLowerCase() === category.toLowerCase() &&
+                (p.subCategory || p.subcategory || '') === subcategory &&
+                p.status === 'active'
+            );
 
-            if (Array.isArray(data) && data.length > 0) {
-                // Filter backend data by exact category and subCategory (folder name)
-                const filteredData = data.filter(p =>
-                    (p.category || '').toLowerCase() === category.toLowerCase() &&
-                    (p.subCategory || p.subcategory || '') === subcategory
-                );
-
-                setProducts(filteredData);
-            } else {
-                setProducts([]);
-            }
+            setProducts(filteredData);
         } catch (error) {
-            console.error("Error fetching products", error);
+            console.error("Error filtering products", error);
             setProducts([]);
         } finally {
             setLoading(false);

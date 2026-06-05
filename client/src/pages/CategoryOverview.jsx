@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
-import axios from 'axios';
+import { products } from '../data/products';
 import './CollectionStyles.css';
 
 const CategoryOverview = () => {
@@ -30,13 +30,13 @@ const CategoryOverview = () => {
         fetchDynamicSubcategories();
     }, [category, t]);
 
-    const fetchDynamicSubcategories = async () => {
+    const fetchDynamicSubcategories = () => {
         setLoading(true);
         try {
-            const { data } = await axios.get('http://localhost:5000/api/products');
-            
-            // Filter products by the current category
-            const categoryProducts = data.filter(p => (p.category || '').toLowerCase() === category.toLowerCase());
+            // Filter active products by the current category
+            const categoryProducts = products.filter(p => 
+                (p.category || '').toLowerCase() === category.toLowerCase() && p.status === 'active'
+            );
             
             // Extract unique subcategories
             const subsMap = new Map();

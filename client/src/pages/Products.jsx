@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import ProductCard from '../components/ui/ProductCard';
 import SectionTitle from '../components/ui/SectionTitle';
-import axios from 'axios';
+import { products as localProducts } from '../data/products';
 import { motion } from 'framer-motion';
 
 const Products = () => {
@@ -15,18 +15,8 @@ const Products = () => {
     const [subCatFilter, setSubCatFilter] = useState('all');
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                // Pointing to absolute server url for development since proxy might not be set
-                const { data } = await axios.get('http://localhost:5000/api/products');
-                setProducts(data);
-            } catch (error) {
-                console.error("Error fetching products", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProducts();
+        setProducts(localProducts);
+        setLoading(false);
     }, []);
 
     // Dynamically calculate the subcategories available for the currently selected filter

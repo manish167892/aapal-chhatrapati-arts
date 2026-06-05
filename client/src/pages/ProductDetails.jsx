@@ -5,33 +5,19 @@ import ProductGallery from '../components/product/ProductGallery';
 import ProductInfo from '../components/product/ProductInfo';
 import ProductCard from '../components/ui/ProductCard';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import './ProductDetails.css';
 
-// Hook fetching from backend API with fallback to local mock data
+// Hook resolving product from local data
 const useProduct = (slug) => {
     const [data, setData] = useState({ product: null, loading: true, error: null });
 
     useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                const response = await axios.get(`http://localhost:5000/api/products/${slug}`);
-                if (response.data) {
-                    setData({ product: response.data, loading: false, error: null });
-                } else {
-                    throw new Error("No product data returned");
-                }
-            } catch (error) {
-                console.warn("Backend product fetch failed, trying local fallback", error);
-                const foundProduct = products.find(p => p.slug === slug || p.id === slug);
-                if (foundProduct) {
-                    setData({ product: foundProduct, loading: false, error: null });
-                } else {
-                    setData({ product: null, loading: false, error: "Product not found" });
-                }
-            }
-        };
-        fetchProduct();
+        const foundProduct = products.find(p => p.slug === slug || p.id === slug);
+        if (foundProduct) {
+            setData({ product: foundProduct, loading: false, error: null });
+        } else {
+            setData({ product: null, loading: false, error: "Product not found" });
+        }
     }, [slug]);
 
     return data;
