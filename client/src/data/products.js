@@ -145,3 +145,32 @@ productsMetadata.forEach((meta) => {
 });
 
 export const products = finalProducts;
+
+// === DEBUG: Product Discovery Summary ===
+console.group('[products.js] Static Product Discovery');
+console.log('Total glob keys:', Object.keys(imageModules).length);
+console.log('Total discovered products:', finalProducts.length);
+
+const cats = [...new Set(finalProducts.map(p => p.category))];
+console.log('Categories:', cats);
+
+const subCats = [...new Set(finalProducts.map(p => p.subCategory || p.subcategory || 'NONE'))];
+console.log('All subCategories:', subCats);
+
+// History-specific
+const historyProducts = finalProducts.filter(p => p.category === 'history');
+console.log('History products:', historyProducts.length);
+const historySubCats = [...new Set(historyProducts.map(p => p.subCategory || 'NONE'))];
+console.log('History subCategories:', historySubCats);
+
+// Show sample for "छत्रपती शिवाजी महाराज"
+const shivajiProducts = finalProducts.filter(p => 
+  (p.subCategory || '').includes('शिवाजी') || (p.subCategory || '').includes('छत्रपती')
+);
+console.log('Products with शिवाजी/छत्रपती in subCategory:', shivajiProducts.length);
+shivajiProducts.forEach(p => {
+  console.log(`  name: ${p.name?.en || p.name}, subCategory: "${p.subCategory}", status: ${p.status}`);
+});
+console.groupEnd();
+// === END DEBUG ===
+

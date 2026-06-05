@@ -25,12 +25,44 @@ const SubcategoryProducts = () => {
     const fetchProducts = () => {
         setLoading(true);
         try {
+            // === DEBUG START ===
+            const toHex = (str) => Array.from(str).map(c => c.codePointAt(0).toString(16).padStart(4, '0')).join(' ');
+            console.group('[SubcategoryProducts] DEBUG');
+            console.log('useParams category:', JSON.stringify(category));
+            console.log('useParams subcategory:', JSON.stringify(subcategory));
+            console.log('subcategory hex:', toHex(subcategory || ''));
+            console.log('subcategory length:', (subcategory || '').length);
+            
+            // Log all unique subCategory values from local products
+            const allSubCats = [...new Set(localProducts.map(p => p.subCategory || p.subcategory || ''))];
+            console.log('All discovered subCategory values:', allSubCats);
+            allSubCats.forEach(sc => {
+                console.log(`  subCat "${sc}" hex: ${toHex(sc)}, length: ${sc.length}, match: ${sc === subcategory}`);
+            });
+
+            // Log category-filtered products
+            const catFiltered = localProducts.filter(p =>
+                (p.category || '').toLowerCase() === category.toLowerCase()
+            );
+            console.log('Products matching category:', catFiltered.length);
+
             // Filter local products by exact category and subCategory (folder name)
             const filteredData = localProducts.filter(p =>
                 (p.category || '').toLowerCase() === category.toLowerCase() &&
                 (p.subCategory || p.subcategory || '') === subcategory &&
                 p.status === 'active'
             );
+
+            console.log('Products matching category + subcategory + active:', filteredData.length);
+            if (filteredData.length === 0 && catFiltered.length > 0) {
+                console.warn('NO MATCH — showing first 3 category products for comparison:');
+                catFiltered.slice(0, 3).forEach(p => {
+                    const pSub = p.subCategory || p.subcategory || '';
+                    console.log(`  product "${p.name?.en || p.name}" subCategory: "${pSub}" (hex: ${toHex(pSub)}) status: ${p.status}`);
+                });
+            }
+            console.groupEnd();
+            // === DEBUG END ===
 
             setProducts(filteredData);
         } catch (error) {
