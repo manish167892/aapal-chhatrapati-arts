@@ -68,43 +68,6 @@ export const productsMetadata = [
         color: "Antique",
         weight: "Approx 4.5 KG"
     },
-    {
-        id: "RM-001",
-        sku: "RM-001",
-        category: "history",
-        subCategory: "ऐतिहासिक वस्तू",
-        isPremium: true,
-        slug: "shivaji-maharaj-rajmudra-black",
-        stock: 20,
-        stockQuantity: 20,
-        image: "/images/shivaji maharaj rajmudra black/1.jpeg",
-        images: [
-            "/images/shivaji maharaj rajmudra black/1.jpeg",
-            "/images/shivaji maharaj rajmudra black/2.jpeg",
-            "/images/shivaji maharaj rajmudra black/3.jpeg",
-            "/images/shivaji maharaj rajmudra black/4.jpeg",
-            "/images/shivaji maharaj rajmudra black/5.jpeg",
-            "/images/shivaji maharaj rajmudra black/6.jpeg",
-            "/images/shivaji maharaj rajmudra black/7.jpeg",
-            "/images/shivaji maharaj rajmudra black/8.jpeg",
-            "/images/shivaji maharaj rajmudra black/9.jpeg"
-        ],
-        price: "1,200",
-        basePrice: 12000, // or 1200 as price
-        name: {
-            en: "Shivaji Maharaj Rajmudra (Black)",
-            mr: "छत्रपती शिवाजी महाराज राजमुद्रा (काळा रंग)",
-            hi: "छत्रपति शिवाजी महाराज राजमुद्रा (काला रंग)"
-        },
-        size: "Standard",
-        material: {
-            en: "Premium Finish",
-            mr: "प्रीमियम फिनिश",
-            hi: "प्रीमियम फिनिश"
-        },
-        color: "Black",
-        weight: "Approx 0.5 KG"
-    },
     
     {
         id: "SM-003",
