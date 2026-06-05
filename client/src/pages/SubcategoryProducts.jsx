@@ -3,24 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import ProductCard from '../components/ui/ProductCard';
-import { products as localProducts } from '../data/products';
 import axios from 'axios';
 import './CollectionStyles.css';
 
-// Used to map slugs to human readable titles for the header
-const subcategoryLabels = {
-    'shivaji-maharaj': 'subCatShivaji',
-    'sambhaji-maharaj': 'subCatSambhaji',
-    'shahu-maharaj': 'subCatShahu',
-    'historical-artifacts': 'subCatArtifacts',
-    'fiber-statues': 'Fiber Statues',
-    'brass-statues': 'Brass Statues',
-    'photo-frames': 'Photo Frames',
-    'wooden-light-box': 'Wooden Light Box',
-    'folk-art': 'Folk Art'
-};
-
 const SubcategoryProducts = () => {
+    // subcategory here will be the folder name (e.g. "श्री गणेश") decoded by react-router
     const { category, subcategory } = useParams();
     const navigate = useNavigate();
     const { t } = useLanguage();
@@ -28,8 +15,7 @@ const SubcategoryProducts = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const labelOrKey = subcategoryLabels[subcategory] || subcategory;
-    const title = t(labelOrKey);
+    const title = subcategory; 
     const categoryTitle = category === 'history' ? t('historyTitle') || 'Historical Collection' : t('devotionTitle') || 'Devotion Collection';
 
     useEffect(() => {
@@ -42,24 +28,19 @@ const SubcategoryProducts = () => {
             const { data } = await axios.get('http://localhost:5000/api/products');
 
             if (Array.isArray(data) && data.length > 0) {
-                // Filter backend data by both category and subcategory
-                // If backend does not support subcategory yet, fallback to local data for this demo
+                // Filter backend data by exact category and subCategory (folder name)
                 const filteredData = data.filter(p =>
-                    (p.category || '').toLowerCase() === category &&
-                    (p.subcategory || '').toLowerCase() === subcategory
+                    (p.category || '').toLowerCase() === category.toLowerCase() &&
+                    (p.subCategory || p.subcategory || '') === subcategory
                 );
 
-                if (filteredData.length > 0) {
-                    setProducts(filteredData);
-                } else {
-                    setProducts(localProducts.filter(p => p.category === category && p.subcategory === subcategory));
-                }
+                setProducts(filteredData);
             } else {
-                setProducts(localProducts.filter(p => p.category === category && p.subcategory === subcategory));
+                setProducts([]);
             }
         } catch (error) {
-            console.error("Error fetching products, using local fallback", error);
-            setProducts(localProducts.filter(p => p.category === category && p.subcategory === subcategory));
+            console.error("Error fetching products", error);
+            setProducts([]);
         } finally {
             setLoading(false);
         }
@@ -133,7 +114,7 @@ const SubcategoryProducts = () => {
                                                 exit={{ opacity: 0, scale: 0.9 }}
                                                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                                             >
-                                                <ProductCard product={product} isApiData={!!product._id} />
+                                                <ProductCard product={product} isApiData={true} />
                                             </motion.div>
                                         ))}
                                     </AnimatePresence>

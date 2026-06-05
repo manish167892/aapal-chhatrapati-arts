@@ -9,7 +9,7 @@ const ProductGallery = ({ mainImage, images, title }) => {
     const [activeImage, setActiveImage] = useState(mainImage);
     const containerRef = useRef(null);
     // Helper to safely encode URLs with spaces or special characters
-    const encode = (url) => encodeURI(url);
+    const encode = (url) => url;
 
     useEffect(() => {
         setActiveImage(mainImage);

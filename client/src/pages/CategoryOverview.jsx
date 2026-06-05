@@ -2,22 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
+import axios from 'axios';
 import './CollectionStyles.css';
-
-const historySubcategories = [
-    { id: 'shivaji-maharaj', labelKey: 'subCatShivaji', img: '/images/shivaji maharaj rajmudra bronz/1.jpeg' },
-    { id: 'sambhaji-maharaj', labelKey: 'subCatSambhaji', img: '/images/sambhaji maharaj/1.jpeg' },
-    { id: 'shahu-maharaj', labelKey: 'subCatShahu', img: '/images/IMAGE OF COLLECTION/History Collection/HISTORY_COLLECTION.png' },
-    { id: 'historical-artifacts', labelKey: 'subCatArtifacts', img: '/images/IMAGE OF COLLECTION/Heritage & Folk Art/Heritage & Folk Art.png' }
-];
-
-const devotionSubcategories = [
-    { id: 'fiber-statues', label: 'Fiber Statues', img: '/images/IMAGE OF COLLECTION/Devotion Collection/Devotion_Collection.png' },
-    { id: 'brass-statues', label: 'Brass Statues', img: '/images/IMAGE OF COLLECTION/Devotion Collection/Devotion_Collection.png' },
-    { id: 'accessories', label: 'Accessories', img: '/images/IMAGE OF COLLECTION/Devotion Collection/Devotion_Collection.png' },
-    { id: 'photo-frames', label: 'Photo Frames', img: '/images/IMAGE OF COLLECTION/Devotion Collection/Devotion_Collection.png' },
-    { id: 'wooden-light-box', label: 'Wooden Light Box', img: '/images/IMAGE OF COLLECTION/Devotion Collection/Devotion_Collection.png' }
-];
 
 const CategoryOverview = () => {
     const { category } = useParams();
@@ -25,28 +11,61 @@ const CategoryOverview = () => {
     const { t } = useLanguage();
 
     const [subcategories, setSubcategories] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
     useEffect(() => {
         if (category === 'history') {
-            setSubcategories(historySubcategories);
             setTitle(t('historyTitle') || 'Historical Collection');
             setDescription(t('historyDesc') || 'A curated exhibition of our premium Maratha Empire heritage artifacts.');
         } else if (category === 'devotion') {
-            setSubcategories(devotionSubcategories);
             setTitle(t('devotionTitle') || 'Devotion Collection');
             setDescription(t('devotionDesc') || 'Sacred idols and spiritual elements crafted with profound reverence.');
         } else {
-            // Fallback or handle unknown category
-            setSubcategories([]);
             setTitle('Collection');
             setDescription('Explore our collections.');
         }
+        
+        fetchDynamicSubcategories();
     }, [category, t]);
 
+    const fetchDynamicSubcategories = async () => {
+        setLoading(true);
+        try {
+            const { data } = await axios.get('http://localhost:5000/api/products');
+            
+            // Filter products by the current category
+            const categoryProducts = data.filter(p => (p.category || '').toLowerCase() === category.toLowerCase());
+            
+            // Extract unique subcategories
+            const subsMap = new Map();
+            
+            categoryProducts.forEach(product => {
+                const subCat = product.subCategory || product.subcategory;
+                if (subCat && !subsMap.has(subCat)) {
+                    subsMap.set(subCat, {
+                        id: subCat, // The raw folder name acts as the ID
+                        label: subCat,
+                        // Use the first image of the first product in this subcategory as the thumbnail
+                        img: product.images && product.images.length > 0 
+                            ? product.images[0] 
+                            : '/images/IMAGE OF COLLECTION/HISTORY_COLLECTION.png'
+                    });
+                }
+            });
+            
+            setSubcategories(Array.from(subsMap.values()));
+        } catch (error) {
+            console.error("Error fetching subcategories:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const handleCardClick = (subId) => {
-        navigate(`/collection/${category}/${subId}`);
+        // subId is the exact folder name, e.g. "श्री गणेश"
+        navigate(`/collection/${category}/${encodeURIComponent(subId)}`);
     };
 
     return (
@@ -81,30 +100,41 @@ const CategoryOverview = () => {
 
                 {/* Subcategory Grid */}
                 <div className="subcategory-grid mt-4">
-                    {subcategories.map((sub, index) => (
-                        <motion.div
-                            key={sub.id}
-                            className="subcategory-card-premium group cursor-pointer"
-                            onClick={() => handleCardClick(sub.id)}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.4, delay: index * 0.05 }}
-                        >
-                            <div className="subcategory-img-wrapper">
-                                <img
-                                    src={sub.img}
-                                    alt={sub.label}
-                                    className="subcategory-img"
-                                    loading="lazy"
-                                />
-                                <div className="subcategory-overlay">
-                                    <h3 className="subcategory-label">
-                                        {sub.labelKey ? t(sub.labelKey) : sub.label}
-                                    </h3>
+                    {loading ? (
+                        <div className="text-center py-10 w-full col-span-full">
+                            <span className="loader"></span>
+                            <p className="mt-4 text-brand-gold">Loading collections...</p>
+                        </div>
+                    ) : subcategories.length === 0 ? (
+                        <div className="text-center py-10 w-full col-span-full text-neutral-400">
+                            No collections found for this category.
+                        </div>
+                    ) : (
+                        subcategories.map((sub, index) => (
+                            <motion.div
+                                key={sub.id}
+                                className="subcategory-card-premium group cursor-pointer"
+                                onClick={() => handleCardClick(sub.id)}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4, delay: index * 0.05 }}
+                            >
+                                <div className="subcategory-img-wrapper">
+                                    <img
+                                        src={sub.img}
+                                        alt={sub.label}
+                                        className="subcategory-img"
+                                        loading="lazy"
+                                    />
+                                    <div className="subcategory-overlay">
+                                        <h3 className="subcategory-label">
+                                            {sub.label}
+                                        </h3>
+                                    </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        ))
+                    )}
                 </div>
             </div>
         </motion.div>

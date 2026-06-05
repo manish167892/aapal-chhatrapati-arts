@@ -19,13 +19,13 @@ function getCategory(folderName) {
 }
 
 async function importImages() {
-  // Connect to MongoDB (uses same connection helper as other scripts)
+  // Connect to MongoDB
   const connectDB = require('./config/db');
   await connectDB();
 
   const imageFiles = [];
 
-  // Recursively walk the images directory and collect file paths
+  // Recursively walk the images directory
   function walk(dir) {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
@@ -33,67 +33,121 @@ async function importImages() {
       if (entry.isDirectory()) {
         walk(fullPath);
       } else if (entry.isFile()) {
-        // Store path relative to IMAGES_ROOT so we can build the public URL later
-        const relPath = path.relative(IMAGES_ROOT, fullPath);
-        imageFiles.push(relPath);
+        // Only process image files
+        if (entry.name.match(/\.(jpg|jpeg|png|webp|gif)$/i)) {
+          const relPath = path.relative(IMAGES_ROOT, fullPath);
+          imageFiles.push(relPath);
+        }
       }
     }
   }
 
   walk(IMAGES_ROOT);
+  console.log(`Found ${imageFiles.length} image files.`);
 
-  console.log(`Found ${imageFiles.length} image files to import.`);
+  // Grouping logic
+  // Map key: Product identifier. Value: product data object
+  const productsMap = new Map();
 
   for (const relPath of imageFiles) {
-    // Split the relative path into its components
     const parts = relPath.split(path.sep);
-    // Top‑level folder (e.g. "History Collection") determines the category
-    const topFolder = parts[0];
-    // If there is a sub‑folder, it becomes the subCategory; otherwise undefined
-    const subFolder = parts.length > 2 ? parts[1] : null;
-    const fileName = parts[parts.length - 1]; // keep the original filename
+    // parts = [TopLevel, SubLevel, ProductFolder, ImageFile] depending on depth
+    
+    let categoryFolder = null;
+    let subCategoryFolder = null;
+    let productFolder = null;
+    let fileName = null;
 
-    // Build the public URL that the front‑end expects
-    const imageUrl = encodeURI(`/images/IMAGE OF COLLECTION/${relPath.replace(/\\/g, '/')}`);
+    if (parts.length === 1) {
+      // Loose file in root
+      fileName = parts[0];
+      categoryFolder = 'Uncategorized';
+    } else if (parts.length === 2) {
+      // e.g. Devotion Collection/Devotion_Collection.png
+      categoryFolder = parts[0];
+      fileName = parts[1];
+    } else if (parts.length === 3) {
+      // e.g. Devotion Collection/श्री गणेश/उशी बाल गणेश.jpeg
+      categoryFolder = parts[0];
+      subCategoryFolder = parts[1];
+      fileName = parts[2];
+    } else if (parts.length >= 4) {
+      // e.g. History Collection/छत्रपती शिवाजी महाराज/महयोद्धा - बावडा चौक १३ inch/3.jpeg
+      categoryFolder = parts[0];
+      subCategoryFolder = parts[1];
+      productFolder = parts[parts.length - 2]; // Immediate parent folder
+      fileName = parts[parts.length - 1];
+    }
 
-    const category = getCategory(topFolder);
-    const subCategory = subFolder || undefined;
+    const category = getCategory(categoryFolder);
+    const subCategory = subCategoryFolder || undefined;
 
-    // Use the filename (including extension) as the product name, exactly as requested
-    const productName = fileName;
+    // Determine Product Name and unique Map Key
+    let productName;
+    let mapKey;
 
-    // Generate a simple slug from the filename (strip extension, lower‑case, replace spaces)
-    const slug = fileName.replace(/\.[^/.]+$/, '').toLowerCase().replace(/\s+/g, '-');
+    if (productFolder) {
+      // Depth >= 4: The folder is the product. All images in it go to the gallery.
+      productName = productFolder;
+      mapKey = `${category}_${subCategory}_${productFolder}`;
+    } else {
+      // Depth 2 or 3: The file itself is an individual product.
+      productName = fileName.replace(/\.[^/.]+$/, ''); // remove extension
+      mapKey = `${category}_${subCategory}_${fileName}`;
+    }
 
-    // Construct a minimal product document – pricing, SKU, inventory are intentionally left empty
-    const productDoc = {
-      sku: '',
-      slug,
-      name: productName,
-      category,
-      subCategory,
-      type: 'Basic',
-      status: 'active',
-      basePrice: null,
-      description: '',
-      material: '',
-      finish: '',
-      weight: null,
-      images: [imageUrl],
-      trackInventory: false,
-      stockQuantity: null,
-      variants: []
-    };
+    const imageUrl = `/images/IMAGE OF COLLECTION/${relPath.replace(/\\/g, '/')}`;
 
-    try {
-      await Product.create(productDoc);
-      console.log(`Imported product: ${productName} → category: ${category}${subCategory ? ', subCategory: ' + subCategory : ''}`);
-    } catch (err) {
-      console.error('Failed to import', productName, err);
+    if (!productsMap.has(mapKey)) {
+      // Generate a simple slug. We only replace spaces with hyphens. 
+      // We don't strip non-word characters to preserve Marathi Unicode.
+      let slug = productName.trim().toLowerCase().replace(/\s+/g, '-');
+      // Remove any characters that could break URLs (like ?, &, #, /, %)
+      slug = slug.replace(/[?&#\/%]/g, '');
+
+      productsMap.set(mapKey, {
+        sku: undefined, // Let it be undefined to avoid unique index issues
+        slug: slug || Date.now().toString(), // fallback if regex strips everything
+        name: productName,
+        category,
+        subCategory,
+        type: 'Basic',
+        status: 'active',
+        basePrice: null, // intentionally null for imported bulk
+        description: '',
+        material: '',
+        finish: '',
+        weight: null,
+        images: [imageUrl],
+        trackInventory: false,
+        stockQuantity: null,
+        variants: []
+      });
+    } else {
+      // If product already exists (e.g. second image in a ProductFolder), append image
+      const existingProduct = productsMap.get(mapKey);
+      existingProduct.images.push(imageUrl);
     }
   }
 
-  console.log('Image import completed.');
+  // Clear existing imported products (those with basePrice: null) to avoid duplicates
+  console.log('Clearing old imported products...');
+  await Product.deleteMany({ basePrice: null });
+
+  console.log(`Starting import of ${productsMap.size} distinct products...`);
+
+  // Insert products
+  let importedCount = 0;
+  for (const productDoc of productsMap.values()) {
+    try {
+      await Product.create(productDoc);
+      importedCount++;
+    } catch (err) {
+      console.error('Failed to import', productDoc.name, err.message);
+    }
+  }
+
+  console.log(`Successfully imported ${importedCount} products out of ${productsMap.size}.`);
   process.exit(0);
 }
 

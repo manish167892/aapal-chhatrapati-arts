@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import ProductCard from '../components/ui/ProductCard';
 import SectionTitle from '../components/ui/SectionTitle';
@@ -29,10 +29,27 @@ const Products = () => {
         fetchProducts();
     }, []);
 
+    // Dynamically calculate the subcategories available for the currently selected filter
+    const dynamicSubcategories = useMemo(() => {
+        if (filter === 'all') return [];
+        const filteredByCategory = products.filter(p => (p.category || '').toLowerCase() === filter.toLowerCase());
+        const subsMap = new Set();
+        filteredByCategory.forEach(p => {
+            const subCat = p.subCategory || p.subcategory;
+            if (subCat) {
+                subsMap.add(subCat);
+            }
+        });
+        return Array.from(subsMap).sort();
+    }, [products, filter]);
+
     const filteredProducts = products.filter(p => {
-        if (filter !== 'all' && p.category !== filter) return false;
+        if (filter !== 'all' && (p.category || '').toLowerCase() !== filter.toLowerCase()) return false;
         if (typeFilter !== 'all' && p.type !== typeFilter) return false;
-        if (filter === 'history' && subCatFilter !== 'all' && p.subCategory !== subCatFilter && p.subcategory !== subCatFilter) return false;
+        
+        // Correctly use subCategory from database
+        const pSubCat = p.subCategory || p.subcategory;
+        if (filter !== 'all' && subCatFilter !== 'all' && pSubCat !== subCatFilter) return false;
         
         if (searchQuery) {
             const query = searchQuery.toLowerCase();
@@ -55,8 +72,8 @@ const Products = () => {
         >
             <div className="container mx-auto px-4">
                 <SectionTitle
-                    title={t('allProductsTitle')}
-                    subtitle={t('allProductsDesc')}
+                    title={t('allProductsTitle') || 'Master Catalog'}
+                    subtitle={t('allProductsDesc') || 'Explore our complete collection.'}
                 />
 
                 {/* Filters */}
@@ -80,17 +97,16 @@ const Products = () => {
                         <option value="heritage">Heritage</option>
                     </select>
 
-                    {filter === 'history' && (
+                    {filter !== 'all' && dynamicSubcategories.length > 0 && (
                         <select
-                            className="bg-neutral-800 text-white border border-neutral-700 rounded px-4 py-2 outline-none"
+                            className="bg-neutral-800 text-white border border-neutral-700 rounded px-4 py-2 outline-none max-w-xs truncate"
                             value={subCatFilter}
                             onChange={(e) => setSubCatFilter(e.target.value)}
                         >
-                            <option value="all">All History Subcategories</option>
-                            <option value="shivaji-maharaj">{t('subCatShivaji') || 'Chhatrapati Shivaji Maharaj'}</option>
-                            <option value="sambhaji-maharaj">{t('subCatSambhaji') || 'Chhatrapati Sambhaji Maharaj'}</option>
-                            <option value="shahu-maharaj">{t('subCatShahu') || 'Rajarshi Chhatrapati Shahu Maharaj'}</option>
-                            <option value="historical-artifacts">{t('subCatArtifacts') || 'Historical Artifacts'}</option>
+                            <option value="all">All Subcollections</option>
+                            {dynamicSubcategories.map(subCat => (
+                                <option key={subCat} value={subCat}>{subCat}</option>
+                            ))}
                         </select>
                     )}
 
