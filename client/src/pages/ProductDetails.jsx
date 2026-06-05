@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { products } from '../data/products';
 import ProductGallery from '../components/product/ProductGallery';
 import ProductInfo from '../components/product/ProductInfo';
-import ProductCard from '../components/ui/ProductCard';
 import { motion } from 'framer-motion';
 import './ProductDetails.css';
 
@@ -89,17 +88,7 @@ const ProductDetails = () => {
                 </div>
             </div>
 
-            <div className="related-products-section">
-                <h2 className="related-title">More from the Collection</h2>
-                <div className="title-decorator"></div>
-                <div className="products-grid mt-4">
-                    {/* Filter out current product and return max 4 */}
-                    {products.filter(p => p.id !== product.id).slice(0, 4).map(relatedProduct => (
-                        <ProductCard key={relatedProduct.id} product={relatedProduct} />
-                    ))}
-                </div>
-            </div>
-        </motion.div>
+                </motion.div>
     );
 };
 
