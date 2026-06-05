@@ -112,14 +112,14 @@
 }
 
 .brand-logo-img {
-    height: 50px;
+    height: 64px;
     width: auto;
     object-fit: contain;
     transition: all 0.4s ease;
 }
 
 .navbar.scrolled .brand-logo-img {
-    height: 42px;
+    height: 52px;
 }
 
 .navbar-actions {
@@ -355,11 +355,11 @@
     }
 
     .brand-logo-img {
-        height: 60px;
+        height: 78px;
     }
 
     .navbar.scrolled .brand-logo-img {
-        height: 48px;
+        height: 60px;
     }
 
     .menu-overlay {
@@ -369,6 +369,6 @@
 
 @media (min-width: 1024px) {
     .brand-logo-img {
-        height: 65px;
+        height: 85px;
     }
 }

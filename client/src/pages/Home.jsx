@@ -15,9 +15,8 @@ const Home = () => {
             transition={{ duration: 0.8 }}
         >
             <Hero />
-            <CulturalIntro />
-
             <History />
+            <CulturalIntro />
             <About />
         </motion.div>
     );

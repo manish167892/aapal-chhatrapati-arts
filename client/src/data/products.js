@@ -2,7 +2,7 @@ export const products = [
     {
         id: "SM-001",
         category: "history",
-        subcategory: "sambhaji-maharaj",
+        subcategory: "छत्रपती संभाजी महाराज",
         isPremium: true,
         slug: "sambhaji-maharaj-bust",
         stock: 15,
@@ -31,7 +31,7 @@ export const products = [
     {
         id: "SM-002",
         category: "history",
-        subcategory: "sambhaji-maharaj-standing",
+        subcategory: "छत्रपती संभाजी महाराज",
         isPremium: true,
         slug: "sambhaji-maharaj-standing",
         stock: 10,
@@ -64,7 +64,7 @@ export const products = [
     {
         id: "RM-001",
         category: "history",
-        subcategory: "rajmudra-black",
+        subcategory: "ऐतिहासिक वस्तू",
         isPremium: true,
         slug: "shivaji-maharaj-rajmudra-black",
         stock: 20,
@@ -98,7 +98,7 @@ export const products = [
     {
         id: "RM-002",
         category: "history",
-        subcategory: "rajmudra-bronze",
+        subcategory: "ऐतिहासिक वस्तू",
         isPremium: true,
         slug: "shivaji-maharaj-rajmudra-bronze",
         stock: 15,

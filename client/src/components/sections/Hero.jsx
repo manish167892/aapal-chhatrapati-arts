@@ -54,7 +54,7 @@ const Hero = () => {
 
     const handlePopupContinue = () => {
         setIsPopupOpen(false);
-        navigate('/products');
+        navigate('/collection/history');
     };
 
     const handleScrollDown = () => {
@@ -105,8 +105,8 @@ const Hero = () => {
                     <div className="hero-decorative-line"></div>
 
                     <img
-                        src="/brand-logo/logo.png"
-                        alt="Aapal Chhatrapati Arts Logo"
+                        src="/brand-logo/png-logo-1.png"
+                        alt="Aaple Chhatrapati Arts Logo"
                         className="hero-logo"
                     />
 

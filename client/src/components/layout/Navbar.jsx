@@ -31,7 +31,7 @@ const Navbar = () => {
         <header className={`navbar ${isScrolled ? 'scrolled' : ''} ${isHome && !isScrolled ? 'navbar--transparent' : ''}`} id="main-navbar">
             <div className="container navbar-content">
                 <Link to="/" className="logo" id="navbar-logo">
-                    <img src="/brand-logo/logo.png" alt="Aapal Chhatrapati Arts" className="brand-logo-img" />
+                    <img src="/brand-logo/png-logo-2.png" alt="Aaple Chhatrapati Arts" className="brand-logo-img" />
                 </Link>
 
                 <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`} id="nav-links">
@@ -51,7 +51,7 @@ const Navbar = () => {
                     </div>
                     {/* Mobile-only contact */}
                     <div className="nav-mobile-footer">
-                        <p className="nav-mobile-tagline">From Fort to Legacy</p>
+                        <p className="nav-mobile-tagline">{t('heroTitle')}</p>
                         <a href="tel:+918698167892" className="nav-mobile-contact">
                             +91 86981 67892
                         </a>

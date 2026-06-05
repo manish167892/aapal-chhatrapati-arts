@@ -16,7 +16,7 @@ const About = () => {
                     <h2 className="about-minimal-title">Crafting History</h2>
                     <div className="title-decorator-minimal"></div>
                     <p className="about-minimal-text">
-                        At Aapal Chhatrapati Arts, we are devoted to preserving the magnificent legacy of the Maratha Empire. Every sculpture, every miniature fort, and every Rajmudra is meticulously crafted by artisans who understand the profound historical significance of these artifacts.
+                        At Aaple Chhatrapati Arts, we are devoted to preserving the magnificent legacy of the Maratha Empire. Every sculpture, every miniature fort, and every Rajmudra is meticulously crafted by artisans who understand the profound historical significance of these artifacts.
                     </p>
                     <p className="about-minimal-text">
                         We don't just sell art; we deliver a piece of our glorious history into the hands of those who revere it.

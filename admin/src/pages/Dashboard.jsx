@@ -651,7 +651,7 @@ const Dashboard = () => {
             <Sidebar onLogout={handleLogout} />
             <main className="flex-1 overflow-y-auto">
                 <header className="bg-white shadow px-6 py-4 flex justify-between items-center border-b border-gray-150">
-                    <h1 className="text-xl font-bold text-gray-850">Aapal Chhatrapati Dashboard</h1>
+                    <h1 className="text-xl font-bold text-gray-850">Aaple Chhatrapati Dashboard</h1>
                     <button onClick={handleLogout} className="text-sm text-red-650 hover:text-red-800 font-medium">
                         Logout
                     </button>

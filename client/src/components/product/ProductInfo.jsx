@@ -150,7 +150,7 @@ const ProductInfo = ({ product }) => {
                         Authenticity & Originality Guarantee
                     </h3>
                     <p style={{ color: '#555', fontSize: '0.9rem', lineHeight: '1.6' }}>
-                        This is an original copyrighted design by Aapal Chhatrapati Arts.
+                        This is an original copyrighted design by Aaple Chhatrapati Arts.
                         Each piece is meticulously handcrafted with exhibition-grade quality and precision. Beware of unauthorized replicas.
                     </p>
                 </div>

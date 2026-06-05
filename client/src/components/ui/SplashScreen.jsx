@@ -18,7 +18,7 @@ const SplashScreen = () => {
             >
                 <img
                     src="/brand-logo/logo.png"
-                    alt="Aapal Chhatrapati Arts"
+                    alt="Aaple Chhatrapati Arts"
                     className="splash-logo"
                 />
                 <div className="splash-progress">

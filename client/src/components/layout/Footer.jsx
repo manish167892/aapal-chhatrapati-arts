@@ -37,13 +37,13 @@ const Footer = () => {
                 {/* Column 1 — Brand */}
                 <div className="aca-footer__brand">
                     <img
-                        src="/brand-logo/logo.png"
-                        alt="Aapal Chhatrapati Arts"
+                        src="/brand-logo/png-logo-1.png"
+                        alt="Aaple Chhatrapati Arts"
                         className="aca-footer__logo"
                         loading="lazy"
                     />
-                    <h3 className="aca-footer__name">Aapal Chhatrapati Arts</h3>
-                    <p className="aca-footer__tagline">From Fort to Legacy</p>
+                    <h3 className="aca-footer__name">Aaple Chhatrapati Arts</h3>
+                    <p className="aca-footer__tagline">{t('heroTitle')}</p>
                     <p className="aca-footer__desc">
                         Preserving the artistic and historical legacy of the Maratha Empire
                         through museum-grade artifacts and sculptures.
@@ -100,7 +100,7 @@ const Footer = () => {
 
             {/* ── Bottom Bar ── */}
             <div className="aca-footer__bottom">
-                <p className="aca-footer__copy">&copy; {new Date().getFullYear()} Aapal Chhatrapati Arts. All Rights Reserved.</p>
+                <p className="aca-footer__copy">&copy; {new Date().getFullYear()} Aaple Chhatrapati Arts. All Rights Reserved.</p>
             </div>
 
         </footer>
