@@ -105,41 +105,7 @@ export const productsMetadata = [
         color: "Black",
         weight: "Approx 0.5 KG"
     },
-    {
-        id: "RM-002",
-        sku: "RM-002",
-        category: "history",
-        subCategory: "ऐतिहासिक वस्तू",
-        isPremium: true,
-        slug: "shivaji-maharaj-rajmudra-bronze",
-        stock: 15,
-        stockQuantity: 15,
-        image: "/images/shivaji maharaj rajmudra bronz/1.jpeg",
-        images: [
-            "/images/shivaji maharaj rajmudra bronz/1.jpeg",
-            "/images/shivaji maharaj rajmudra bronz/2.jpeg",
-            "/images/shivaji maharaj rajmudra bronz/3.jpeg",
-            "/images/shivaji maharaj rajmudra bronz/4.jpeg",
-            "/images/shivaji maharaj rajmudra bronz/5.jpeg",
-            "/images/shivaji maharaj rajmudra bronz/6.jpeg",
-            "/images/shivaji maharaj rajmudra bronz/7.jpeg"
-        ],
-        price: "1,500",
-        basePrice: 1500,
-        name: {
-            en: "Shivaji Maharaj Rajmudra (Bronze)",
-            mr: "छत्रपती शिवाजी महाराज राजमुद्रा (कांस्य रंग)",
-            hi: "छत्रपति शिवाजी महाराज राजमुद्रा (कांस्य रंग)"
-        },
-        size: "Standard",
-        material: {
-            en: "Premium Finish",
-            mr: "प्रीमियम फिनिश",
-            hi: "प्रीमियम फिनिश"
-        },
-        color: "Bronze",
-        weight: "Approx 0.5 KG"
-    },
+    
     {
         id: "SM-003",
         sku: "SM-001",
