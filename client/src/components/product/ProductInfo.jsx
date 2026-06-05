@@ -156,12 +156,7 @@ const ProductInfo = ({ product }) => {
                 </div>
             ) : null}
 
-            <div className="product-description" style={{ marginTop: '20px' }}>
-                <h3>Story behind the artifact</h3>
-                <p>
-                    Handcrafted with deep devotion, this remarkable masterpiece bridges the gap between our glorious history and modern craftsmanship. Inspired by the architectural and cultural marvels of the Chhatrapati era, every intricate curve and detail tells a story of valor, heritage, and timeless resilience. Truly an exhibition-grade piece designed for the most elegant homes.
-                </p>
-            </div>
+            
         </div>
     );
 };
