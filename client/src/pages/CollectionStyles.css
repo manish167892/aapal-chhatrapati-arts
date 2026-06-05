@@ -1,0 +1,176 @@
+/* Collection Styles for Category Overview and Subcategory Products */
+
+/* Subcategory Cards Grid (Overview Page) */
+.subcategory-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    /* Mobile: 1 column */
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .subcategory-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* Tablet: 2 columns */
+    }
+}
+
+@media (min-width: 1024px) {
+    .subcategory-grid {
+        grid-template-columns: repeat(4, 1fr);
+        /* Desktop: 4 columns for subcategory cards to allow standard fitting of 8 cards */
+        gap: 2rem;
+    }
+}
+
+/* Enhancing the overlay fade for subcategory cards */
+.subcategory-img-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 -50px 50px -20px rgba(0, 0, 0, 0.9);
+}
+
+/* Products Grid (Filtered Products Page) */
+/* Rules based on requirements: 3 cols desktop, 2 col tablet, 1 col mobile */
+.clean-products-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+    .clean-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .clean-products-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Loader */
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(221, 186, 120, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--color-brand-gold, #DDBA78);
+    animation: spin 1s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Category Overview Page Custom Styles */
+.category-overview-page {
+    padding-top: 7rem;
+    padding-bottom: 4rem;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+}
+
+.co-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.co-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.co-description {
+    color: var(--color-muted);
+    max-width: 42rem;
+    margin: 0 auto;
+    font-size: 1.125rem;
+}
+
+.subcategory-card-premium {
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+}
+
+.subcategory-card-premium:hover {
+    transform: translateY(-8px);
+}
+
+.subcategory-img-wrapper {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4 / 5;
+    /* Elegant portrait ratio */
+    background-color: var(--color-bg-dark, #1a1a1a);
+    border: 1px solid rgba(221, 186, 120, 0.15);
+    /* Subtle gold base border */
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.subcategory-card-premium:hover .subcategory-img-wrapper {
+    border-color: rgba(221, 186, 120, 0.6);
+    /* Glows gold on hover */
+    box-shadow: 0 10px 30px rgba(221, 186, 120, 0.15);
+}
+
+.subcategory-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
+    opacity: 0.85;
+    /* Slightly muted initially */
+}
+
+.subcategory-card-premium:hover .subcategory-img {
+    transform: scale(1.05);
+    /* Softer zoom */
+    opacity: 1;
+}
+
+.subcategory-overlay {
+    position: absolute;
+    inset: 0;
+    /* Elegant soft gradient that fades out gracefully */
+    background: linear-gradient(to top, rgba(15, 15, 15, 0.95) 0%, rgba(15, 15, 15, 0.5) 35%, transparent 75%);
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem 1.5rem;
+    transition: background 0.5s ease;
+}
+
+.subcategory-card-premium:hover .subcategory-overlay {
+    background: linear-gradient(to top, rgba(15, 15, 15, 0.98) 0%, rgba(15, 15, 15, 0.65) 40%, transparent 80%);
+}
+
+.subcategory-label {
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    font-family: var(--font-heading);
+    color: var(--color-white);
+    transition: color 0.4s ease, transform 0.4s ease;
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transform: translateY(0);
+}
+
+.subcategory-card-premium:hover .subcategory-label {
+    color: var(--color-brand-gold, #DDBA78);
+    transform: translateY(-2px);
+}

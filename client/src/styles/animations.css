@@ -1,0 +1,210 @@
+/*
+  Animations — Aapal Chhatrapati Arts
+  Cinematic, Historical, Smooth
+*/
+
+/* ═══ Floating Anti-Gravity Effect ═══ */
+@keyframes subtleFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: subtleFloat 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* ═══ Cinematic Fade In ═══ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.animate-fade {
+  animation: fadeIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ═══ Scroll-Triggered Reveal Animations ═══ */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealScale {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes revealLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes revealRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.reveal-up {
+  animation: revealUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.reveal-scale {
+  animation: revealScale 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* ═══ Gold Shimmer Effect ═══ */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 167, 69, 0.3) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: goldShimmer 3s ease-in-out infinite;
+}
+
+/* ═══ Scroll Down Indicator ═══ */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ═══ Ken Burns Variants ═══ */
+@keyframes kenBurnsZoomIn {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+@keyframes kenBurnsZoomOut {
+  0% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes kenBurnsPanLeft {
+  0% { transform: scale(1.05) translateX(0); }
+  100% { transform: scale(1.08) translateX(-2%); }
+}
+
+@keyframes kenBurnsPanRight {
+  0% { transform: scale(1.05) translateX(0); }
+  100% { transform: scale(1.08) translateX(2%); }
+}
+
+/* ═══ Text Reveal ═══ */
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══ Decorative Line Grow ═══ */
+@keyframes lineGrow {
+  from { width: 0; }
+  to { width: 80px; }
+}
+
+/* ═══ Parallax Fallback ═══ */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* ═══ Slide Up Fade ═══ */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ═══ Spin ═══ */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ═══ Progress Bar ═══ */
+@keyframes progressFill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* ═══ Mobile: Reduce Motion ═══ */
+@media (max-width: 768px) {
+  .animate-float {
+    animation: none;
+  }
+
+  .parallax-bg {
+    background-attachment: scroll;
+  }
+
+  .animate-fade {
+    animation-duration: 1s;
+  }
+}
+
+/* ═══ Prefers Reduced Motion ═══ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

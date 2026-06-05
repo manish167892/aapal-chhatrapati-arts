@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cinzel+Decorative:wght@400;700&family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Marathi:ital@0;1&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ═══ Core Color Palette ═══ */
+  --color-primary: #FF5A36; /* Royal Saffron / Vibrant Orange-Red */
+  --color-primary-light: #FF7B5E; /* Lighter Saffron */
+  --color-primary-dark: #D43F1F; /* Deep Saffron */
+  --color-accent: #FF5A36;
+
+  /* Backgrounds */
+  --color-bg: #FDFBF7; /* Pearl White / Ivory */
+  --color-bg-dark: #070B19; /* Midnight Navy Blue */
+  --color-bg-section: #0B1226; /* Deep Indigo for sections */
+  --color-bg-card: #111A35; /* Card background in dark sections */
+
+  /* Text Colors */
+  --color-dark: #0A1128; /* Deep Navy for primary text on light */
+  --color-white: #FFFFFF;
+  --color-cream: #FDFBF7;
+
+  /* Neutrals */
+  --color-light-accent: #DCE1E9; /* Soft Blue-Gray */
+  --color-muted: #64748B; /* Slate Gray for secondary text */
+  --color-border-gold: rgba(255, 90, 54, 0.3); /* Saffron Border */
+  --color-border-light: rgba(220, 225, 233, 0.3);
+
+  /* Section Tones */
+  --color-bg-saffron: rgba(255, 90, 54, 0.05);
+  --color-bg-earthy: rgba(11, 18, 38, 0.05);
+
+  /* ═══ Typography ═══ */
+  --font-display: 'Cinzel Decorative', serif;
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Outfit', sans-serif;
+
+  /* Marathi/Hindi Overrides */
+  --font-mr-heading: 'Tiro Devanagari Marathi', serif;
+  --font-mr-body: 'Noto Sans Devanagari', sans-serif;
+
+  /* ═══ Spacing ═══ */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 6rem;
+  --spacing-xxl: 8rem;
+
+  /* ═══ Radii ═══ */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
+
+  /* ═══ Shadows ═══ */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.18);
+  --shadow-premium: 0 20px 60px rgba(0, 0, 0, 0.25);
+  --shadow-gold: 0 8px 32px rgba(212, 167, 69, 0.2);
+  --shadow-gold-lg: 0 16px 48px rgba(212, 167, 69, 0.3);
+  --shadow-inner: inset 0 0 20px rgba(0, 0, 0, 0.05);
+
+  /* ═══ Glassmorphism ═══ */
+  --glass-bg: rgba(11, 18, 38, 0.65); /* Navy Glass */
+  --glass-bg-light: rgba(253, 251, 247, 0.85); /* Pearl Glass */
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 24px;
+
+  /* ═══ Transitions ═══ */
+  --transition-fast: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-slow: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-cinematic: 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[lang="mr"],
+[lang="hi"] {
+  --font-heading: var(--font-mr-heading);
+  --font-body: var(--font-mr-body);
+}

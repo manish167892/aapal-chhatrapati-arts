@@ -1,0 +1,45 @@
+.about-section {
+    background-color: var(--color-bg);
+    padding: 8rem 0 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-minimal-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-minimal-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    color: var(--color-dark);
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.title-decorator-minimal {
+    width: 60px;
+    height: 1px;
+    background-color: var(--color-primary);
+    margin: 2.5rem auto;
+}
+
+.about-minimal-text {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--color-dark);
+    opacity: 0.8;
+    line-height: 2.2;
+    font-family: var(--font-body);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}

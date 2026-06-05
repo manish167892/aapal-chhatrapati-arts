@@ -1,0 +1,275 @@
+/* ═══════════════════════════════════════════════════
+   AAPAL CHHATRAPATI ARTS — Premium Heritage Footer
+   ═══════════════════════════════════════════════════ */
+
+.aca-footer {
+    background: #0A0A0A;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ── Gold top accent line ── */
+.aca-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(201, 164, 106, 0.15) 15%,
+        rgba(201, 164, 106, 0.6) 50%,
+        rgba(201, 164, 106, 0.15) 85%,
+        transparent 100%
+    );
+}
+
+/* ── Main content wrapper ── */
+.aca-footer__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 52px 24px 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+}
+
+@media (min-width: 768px) {
+    .aca-footer__inner {
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 56px;
+        padding: 52px 40px 44px;
+        align-items: start;
+    }
+}
+
+@media (min-width: 1200px) {
+    .aca-footer__inner {
+        gap: 80px;
+        padding: 56px 64px 48px;
+    }
+}
+
+/* ─────────────────────────────
+   Column 1 — Brand
+   ───────────────────────────── */
+.aca-footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .aca-footer__brand {
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
+.aca-footer__logo {
+    width: clamp(80px, 10vw, 110px);
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 2px 6px rgba(201, 164, 106, 0.1));
+}
+
+.aca-footer__name {
+    font-family: var(--font-heading, 'Cinzel', serif);
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-weight: 500;
+    color: #FFFFFF;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    line-height: 1.3;
+}
+
+.aca-footer__tagline {
+    font-family: var(--font-heading, 'Cinzel', serif);
+    font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+    color: #C9A46A;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0 0 14px;
+    line-height: 1.4;
+}
+
+.aca-footer__desc {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: clamp(0.8rem, 1vw, 0.88rem);
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.75;
+    margin: 0;
+    max-width: 340px;
+}
+
+/* ─────────────────────────────
+   Column 2 & 3 — Collections & Contact
+   ───────────────────────────── */
+.aca-footer__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .aca-footer__col {
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
+.aca-footer__heading {
+    font-family: var(--font-heading, 'Cinzel', serif);
+    font-size: clamp(0.7rem, 0.9vw, 0.78rem);
+    font-weight: 500;
+    color: #C9A46A;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin: 0 0 20px;
+    line-height: 1;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+/* Subtle underline accent beneath headings */
+.aca-footer__heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 1px;
+    background: rgba(201, 164, 106, 0.35);
+}
+
+@media (min-width: 768px) {
+    .aca-footer__heading::after {
+        left: 0;
+        transform: none;
+    }
+}
+
+.aca-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aca-footer__list a {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: clamp(0.8rem, 1vw, 0.88rem);
+    color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    transition: color 0.35s ease, letter-spacing 0.35s ease;
+    line-height: 1.5;
+    display: inline-block;
+}
+
+.aca-footer__list a:hover {
+    color: #C9A46A;
+    letter-spacing: 0.5px;
+}
+
+/* ── Contact items ── */
+.aca-footer__contact-item {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: clamp(0.8rem, 1vw, 0.88rem);
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.aca-footer__contact-item a {
+    color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    transition: color 0.35s ease;
+}
+
+.aca-footer__contact-item a:hover {
+    color: #C9A46A;
+}
+
+/* ── Social icons ── */
+.aca-footer__socials {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .aca-footer__socials {
+        justify-content: flex-start;
+    }
+}
+
+.aca-footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 164, 106, 0.2);
+    color: rgba(255, 255, 255, 0.45);
+    transition: all 0.35s ease;
+}
+
+.aca-footer__social-link:hover {
+    color: #C9A46A;
+    border-color: rgba(201, 164, 106, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(201, 164, 106, 0.12);
+}
+
+.aca-footer__social-link svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ─────────────────────────────
+   Bottom bar
+   ───────────────────────────── */
+.aca-footer__bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .aca-footer__bottom {
+        padding: 20px 40px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .aca-footer__bottom {
+        padding: 20px 64px;
+    }
+}
+
+.aca-footer__copy {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: clamp(0.68rem, 0.8vw, 0.75rem);
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+}

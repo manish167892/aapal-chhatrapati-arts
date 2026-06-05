@@ -1,0 +1,486 @@
+.pdp-container {
+    padding: 100px var(--spacing-sm) 60px;
+    /* Reduced top/bottom padding */
+    max-width: 1280px;
+    /* Increased active content container but tightened bounds */
+    margin: 0 auto;
+}
+
+.pdp-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .pdp-wrapper {
+        grid-template-columns: 58% 42%;
+        gap: 20px;
+        /* Highly tightened gap */
+    }
+}
+
+/* Gallery Section */
+.pdp-gallery-section {
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 1024px) {
+    .pdp-gallery-section {
+        position: sticky;
+        top: 100px;
+    }
+}
+
+.product-gallery {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.main-image-container {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: 650px;
+    /* Soft, elegant backdrop mimicking exhibition lighting */
+    background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.45) 0%, transparent 65%);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    /* Let image stretch when covering */
+    position: relative;
+    /* Clean line edge */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Very realistic dark drop shadow for a 3D bronze effect */
+    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.2)) drop-shadow(0 15px 15px rgba(0, 0, 0, 0.1));
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.main-image.zoomed {
+    transform: scale(1.8);
+    cursor: zoom-in;
+}
+
+/* Mobile Carousel */
+.mobile-carousel {
+    display: none;
+}
+
+@media (max-width: 1023px) {
+    .desktop-gallery {
+        display: none;
+    }
+    
+    .mobile-carousel {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        gap: 15px;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%); /* Full bleed on mobile */
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .mobile-carousel::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .carousel-image-container {
+        flex: 0 0 85%; /* Shows a bit of the next image */
+        scroll-snap-align: center;
+        aspect-ratio: 4 / 5;
+        background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.45) 0%, transparent 65%);
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        overflow: hidden;
+    }
+    
+    .carousel-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+    }
+}
+
+/* Thumbnails */
+.thumbnail-strip {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.thumbnail {
+    width: 75px;
+    height: 75px;
+    padding: 5px;
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+    transition: all var(--transition-normal);
+}
+
+.thumbnail::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 30px;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: transform 0.4s ease;
+}
+
+.thumbnail:hover::after,
+.thumbnail.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.4;
+    filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.1));
+    transition: all 0.4s ease;
+}
+
+.thumbnail:hover img,
+.thumbnail.active img {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+/* Info Section Styling */
+.pdp-info-section {
+    padding: var(--spacing-md) 0;
+}
+
+.product-info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.product-header {
+    margin-bottom: 0.5rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 14px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    margin-right: 12px;
+    border-radius: 0;
+    /* Sharp, authoritative */
+}
+
+.badge.premium {
+    background: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.badge.category {
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    background: transparent;
+}
+
+.product-title {
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+    line-height: 1.05;
+    margin-bottom: 2px;
+    font-weight: 700;
+}
+
+.product-sku {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* Elegant Specs Table */
+.product-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: var(--spacing-lg) 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.spec-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: baseline;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.spec-label {
+    color: var(--color-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+}
+
+.spec-value {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+.stock-limited {
+    color: var(--color-primary) !important;
+}
+
+.stock-in {
+    color: var(--color-dark);
+}
+
+/* Customizations */
+.customization-section {
+    padding: var(--spacing-md) 0;
+}
+
+.customization-section h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-md);
+    font-family: var(--font-body);
+}
+
+.custom-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.custom-group label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--color-muted);
+    margin-bottom: 0.6rem;
+}
+
+.custom-select,
+.custom-input {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    /* Sharp, architectural edges */
+    font-size: 1rem;
+    color: var(--color-dark);
+    transition: all 0.3s ease;
+}
+
+.custom-select:focus,
+.custom-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+/* Pricing Grid */
+.product-pricing {
+    margin-top: var(--spacing-sm);
+    background: rgba(221, 186, 120, 0.05);
+    padding: 1.2rem;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-brand-gold, #DDBA78);
+}
+
+.price-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-muted);
+    margin-bottom: 0.2rem;
+}
+
+.price-value {
+    font-size: 3.2rem;
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.price-note {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin-top: 0.4rem;
+}
+
+.whatsapp-btn {
+    font-size: 0.95rem;
+    padding: 0.8rem 1.2rem;
+    box-shadow: 0 6px 20px rgba(74, 15, 15, 0.15) !important;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(74, 15, 15, 0.25) !important;
+}
+
+/* Sticky Action Bar (Desktop only, for future scaling but used here natively) */
+.product-actions {
+    margin-top: var(--spacing-md);
+}
+
+/* Sections */
+.authenticity-section {
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.4);
+    border-left: 2px solid var(--color-primary);
+    margin-top: var(--spacing-md);
+}
+
+.authenticity-section h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--color-dark);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.product-description {
+    margin-top: var(--spacing-xl);
+}
+
+.product-description h3 {
+    font-size: 1.6rem;
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+    margin-bottom: 1.2rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.product-description p {
+    color: var(--color-dark);
+    opacity: 0.85;
+    line-height: 1.9;
+    font-size: 1.05rem;
+    text-align: justify;
+}
+
+/* Animations Staggering */
+.product-info-panel>* {
+    opacity: 0;
+    animation: slideUpFade 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.product-info-panel>*:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.product-info-panel>*:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.product-info-panel>*:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.product-info-panel>*:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.product-info-panel>*:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.product-info-panel>*:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.product-info-panel>*:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Related Products */
+.related-products-section {
+    margin-top: 60px;
+    padding-top: 60px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.related-title {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Loading Setup */
+.pdp-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(0, 0, 0, 0.05);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s infinite cubic-bezier(0.55, 0.15, 0.45, 0.85);
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}

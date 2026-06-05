@@ -1,0 +1,28 @@
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-primary, #C5A059);
+    border-radius: 50%;
+}
+
+@media (pointer: coarse),
+(max-width: 768px) {
+    .custom-cursor {
+        display: none !important;
+    }
+}
