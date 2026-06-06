@@ -145,8 +145,8 @@
     }
 
     .collection-image-wrapper {
-        width: 100%;
-        max-width: 100%;
+        width: 88%;
+        max-width: 320%;
         height: auto;
         aspect-ratio: 4 / 5;
     }
