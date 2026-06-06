@@ -17,7 +17,7 @@ const SplashScreen = () => {
                 transition={{ duration: 1, ease: "easeOut" }}
             >
                 <img
-                    src="/brand-logo/logo.png"
+                    src="/brand-logo/png-logo-1.png"
                     alt="Aaple Chhatrapati Arts"
                     className="splash-logo"
                 />

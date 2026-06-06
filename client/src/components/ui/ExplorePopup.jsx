@@ -9,7 +9,7 @@ const ExplorePopup = ({ isOpen, onClose, onContinue }) => {
             <div className="popup-content animate-slide-up" onClick={e => e.stopPropagation()}>
                 <button className="popup-close" onClick={onClose} aria-label="Close popup">&times;</button>
                 <div className="popup-body">
-                    <img src="/brand-logo/logo.png" alt="Logo" className="popup-logo" />
+                    <img src="/brand-logo/png-logo-1.png" alt="Logo" className="popup-logo" />
                     <h3 className="popup-message">
                         Explore our premium range of<br />Shivaji Maharaj sculptures.
                     </h3>
