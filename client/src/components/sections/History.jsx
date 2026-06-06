@@ -34,7 +34,7 @@ const History = () => {
 
     return (
         <section id="collections" className="collections-section">
-            <div className="container" style={{ width: '100%', maxWidth: '1400px', padding: '0 20px', margin: '0 auto' }}>
+            <div className="container" style={{ width: '100%', maxWidth: '1400px', padding: '0 12px', margin: '0 auto' }}>
                 <div className="collections-header">
                     <h2>Our Collections</h2>
                     <p>Discover museum-grade artifacts crafted with historical precision and profound reverence.</p>
@@ -59,10 +59,7 @@ const History = () => {
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </div>
                             </div>
-                            <div className="collection-info">
-                                <h3>{col.title}</h3>
-                                <p>{col.desc}</p>
-                            </div>
+                            
                         </motion.div>
                     ))}
                 </div>
